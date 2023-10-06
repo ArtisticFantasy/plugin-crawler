@@ -30,7 +30,7 @@ llm_words = [
 ]
 plugin_words = [
     "plugin","插件","webui","web ui","extension",
-    "扩展","[^a-z]ui[^a-z]","openai api" #防止ui出现在单词中
+    "扩展","[^a-z]ui[^a-z]" #防止ui出现在单词中
 ]
 
 def get_real_url(redirect_url): #获取百度链接的真实地址
@@ -118,7 +118,7 @@ def get_llm_url(word,url_res,title_res): #百度爬虫获取相关url
 
 githubpat = re.compile('https?://(?:www\.)?github\.com/[\.\w-]+/[\.\w-]+',re.ASCII) #匹配github repo链接（注意不匹配中文）
 def get_github_links(alltext,pos): #获取github repo links 并且要与plugin关键词之间的距离不超过dis
-    dis=1000 #关键词与相关链接的最大距离（字节）
+    dis=500 #关键词与相关链接的最大距离（字节）
     it=githubpat.finditer(alltext)
     i=0
     res=[]
@@ -303,7 +303,7 @@ def output_related_repos(): #输出related github repos到文件
 if __name__=='__main__':
     print("Four modes")
     print("1: Crawl www.baidu.com to update urls and titles.")
-    print("2: Drop the original database and rereate it.")
+    print("2: Drop the original database and recreate it.")
     print("3: Get related github repos and write them to database.")
     print("4: Output related github repos into excel.")
     mode=int(input("Please input which mode you want to use (1-4): "))
